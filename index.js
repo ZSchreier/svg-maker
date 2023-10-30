@@ -1,9 +1,10 @@
 
-
+// require statements for actually running what we want to do
 const inquirer = require('inquirer');
 const fs = require('fs');
 const Shape = require('./lib/shapes.js')
 
+// array of objects for Inquirer to use
 const userInput = [
   {
     type: 'input',
@@ -28,6 +29,7 @@ const userInput = [
   }
 ]
 
+// function that runs on start-up: the first part defines variables based on the responses, and the second part uses them to generate the svg file
 function init() {
   inquirer.prompt(userInput)
     .then(responses => {
@@ -63,4 +65,5 @@ ${shapeMade.render()}
     })
 }
 
+//calling the init function
 init();
