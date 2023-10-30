@@ -2,7 +2,7 @@
 
 const inquirer = require('inquirer');
 const fs = require('fs');
-const shapes = require('./lib/shapes')
+const Shape = require('./lib/shapes.js')
 
 const userInput = [
   {
@@ -31,24 +31,27 @@ const userInput = [
 function init() {
   inquirer.prompt(userInput)
     .then(responses => {
-      const shapeChoice = responses.shape.value[0];
+      const shapeChoice = responses.shape[0];
       const colorChoice = responses.shapeColor;
-      const shapeInput = responses.shape.value[1];
+      const shapeInput = responses.shape[1];
 
       if(shapeChoice === 'triangle'){
-        var shape = new Triangle(shapeInput, colorChoice)
+        var shapeMade = new Shape.Triangle(shapeInput, colorChoice)
+        var xText = 150
       }else if(shapeChoice === 'square'){
-        var shape = new Square(shapeInput, colorChoice)
+        var shapeMade = new Shape.Square(shapeInput, colorChoice)
+        var xText = 100
       }else {
-        var shape = new Circle(shapeInput, colorChoice)
+        var shapeMade = new Shape.Circle(shapeInput, colorChoice)
+        var xText = 150
       }
 
       const text =
 `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
 
-${shape}
+${shapeMade.render()}
 
-<text x="150" y="125" font-size="60" text-anchor="middle" fill="${responses.textColor}">${responses.letters}</text>
+<text x="${xText}" y="125" font-size="60" text-anchor="middle" fill="${responses.textColor}">${responses.letters}</text>
 
 </svg>`
 
